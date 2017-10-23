@@ -1,3 +1,14 @@
-<h2 id="title">Welcome to Ember</h2>
+{{#code-area lang="c"}}
+  using namespace llvm;
 
-{{outlet}}
+  //return the type of the variable for allocation and arguments of functions
+  Type* typeOf(int type) {
+    if (type == T_INTEGER) {
+        return Type::getInt32Ty(getGlobalContext());
+    }
+    if (type == T_FLOAT) {
+        return Type::getFloatTy(getGlobalContext());
+    }
+    return Type::getVoidTy(getGlobalContext());
+  }
+{{/code-area}}
