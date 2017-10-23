@@ -1,4 +1,6 @@
-# ember-highlightjs-shim
+# ember-highlightjs-shim 
+
+[![Build Status](https://travis-ci.org/rennomarcus/ember-highlightjs-shim.svg?branch=master)](https://travis-ci.org/rennomarcus/ember-highlightjs-shim)
 
 Shim to use the terrific library [highlight.js](https://highlightjs.org/).
 
