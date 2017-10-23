@@ -1,26 +1,39 @@
 # ember-highlightjs-shim
 
-This README outlines the details of collaborating on this Ember addon.
+Shim to use the terrific library [highlight.js](https://highlightjs.org/).
 
 ## Installation
 
-* `git clone <repository-url>` this repository
-* `cd ember-highlightjs-shim`
-* `npm install`
+* `npm install ember-highlightjs-shim --save-dev`
 
-## Running
+## Usage
 
-* `ember serve`
-* Visit your app at [http://localhost:4200](http://localhost:4200).
+Once installed, you can import the module `hljs` as an AMD module with:
+
+`import hljs from 'highlight';`
+
+Then use like the code below, for example:
+
+```
+didRender() {
+  this._super(...arguments);
+  hljs.initHighlighting.called = false;
+  hljs.initHighlighting();
+}
+```
+
+You can impor the themes in your config/environment. Example of how to import a theme in your `ENV` object:
+
+```
+let ENV = {
+  highlightThemes: [
+    'atom-one-dark'
+  ]
+}
+```
 
 ## Running Tests
 
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
 * `ember test`
 * `ember test --server`
-
-## Building
-
-* `ember build`
-
-For more information on using ember-cli, visit [https://ember-cli.com/](https://ember-cli.com/).

@@ -1,24 +1,26 @@
 {
   "name": "ember-highlightjs-shim",
-  "version": "0.0.0",
-  "description": "The default blueprint for ember-cli addons.",
+  "version": "0.0.1",
+  "description": "Ember addon to shim highlightjs.",
   "keywords": [
-    "ember-addon"
+    "ember-addon",
+    "highlightjs"
   ],
   "license": "MIT",
-  "author": "",
+  "author": "Marcus Renno",
   "directories": {
     "doc": "doc",
     "test": "tests"
   },
-  "repository": "",
+  "repository": "https://github.com/rennomarcus/ember-highlightjs-shim",
   "scripts": {
     "build": "ember build",
     "start": "ember server",
     "test": "ember try:each"
   },
   "dependencies": {
-    "ember-cli-babel": "^6.6.0"
+    "ember-cli-babel": "^6.6.0",
+    "highlightjs": "^9.10.0"
   },
   "devDependencies": {
     "broccoli-asset-rev": "^2.4.5",
