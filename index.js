@@ -1,26 +1,60 @@
 /* eslint-env node */
 'use strict';
-var fs = require('fs');
+var path = require('path');
+var Funnel = require('broccoli-funnel');
+var mergeTrees = require('broccoli-merge-trees');
+var stew = require('broccoli-stew');
+
+const map = stew.map;
 
 module.exports = {
   name: 'ember-highlightjs-shim',
   included(app, parentAddon) {
     var target = (parentAddon || app);
-    target.options = target.options || {};
-    target.options.babel = target.options.babel || { includePolyfill: true };
     this._super.included.apply(this, arguments);
 
-    this.importThemes(target);
-    target.import('node_modules/highlightjs/highlight.pack.min.js');
+    this.importOption(target);
+    this.importCss(target);
+    this.importJs(target);
+  },
+
+  importOption(target) {
+    const addonENVConfig = target.project.config().highlightTheme || 'atom-one-dark';
+    this.theme = addonENVConfig;
+  },
+
+  importCss(target) {
+    let file = `vendor/highlightjs/styles/${this.theme}.css`;
+    target.import(file);
+  },
+
+  importJs(target) {
+    target.import({
+      development: 'vendor/highlightjs/highlight.pack.js',
+      production: 'vendor/highlightjs/highlight.pack.min.js'
+    });
     target.import('vendor/shims/highlight.js');
   },
-  importThemes: function importThemes(app) {
-    const addonENVConfig = app.project.config()['highlightThemes'] || [];
-    addonENVConfig.forEach((theme) => {
-      let file =`node_modules/highlightjs/styles/${theme}.css`
-      if (fs.existsSync(file)) {
-        app.import(file);
-      }
+
+  treeForVendor(vendorTree) {
+    let trees = [];
+    if (vendorTree) {
+      trees.push(vendorTree);
+    }
+    var hlCss = new Funnel(path.dirname(require.resolve('highlightjs')), {
+      srcDir: 'styles',
+      files: [this.theme + '.css'],
+      destDir: 'highlightjs'
     });
-  }
+    trees.push(hlCss);
+
+    var hlJs = new Funnel(path.dirname(require.resolve('highlightjs')), {
+      files: ['highlight.pack.js', 'highlight.pack.min.js'],
+      destDir: 'highlightjs'
+    });
+    trees.push(hlJs);
+    return map(mergeTrees(trees), (content) => content);
+  },
+
+
 };
