@@ -2,11 +2,11 @@
 
 [![Build Status](https://travis-ci.org/rennomarcus/ember-highlightjs-shim.svg?branch=master)](https://travis-ci.org/rennomarcus/ember-highlightjs-shim)
 
-Shim to use the terrific library [highlight.js](https://highlightjs.org/).
+Shim to use the terrific library [highlight.js](https://highlightjs.org/) to highlight code.
 
 ## Installation
 
-* `npm install ember-highlightjs-shim --save-dev`
+* `ember install ember-highlightjs-shim`
 
 ## Usage
 
@@ -24,16 +24,15 @@ didRender() {
 }
 ```
 
-You can impor the themes in your config/environment. Example of how to import a theme in your `ENV` object:
+You can import a theme in your config/environment. Example of how to import a theme in your `ENV` object:
 
 ```
 let ENV = {
-  highlightThemes: [
-    'atom-one-dark'
-  ]
+  highlightTheme: 'atom-one-dark'
 }
 ```
 
+The default theme is 'atom-one-dark'. You can find the list of themes [here](https://highlightjs.org/static/demo/)
 ## Running Tests
 
 * `npm test` (Runs `ember try:each` to test your addon against multiple Ember versions)
