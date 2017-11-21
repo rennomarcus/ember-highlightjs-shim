@@ -4,6 +4,7 @@ var path = require('path');
 var Funnel = require('broccoli-funnel');
 var mergeTrees = require('broccoli-merge-trees');
 var stew = require('broccoli-stew');
+var fs = require('fs');
 
 const map = stew.map;
 
@@ -24,8 +25,10 @@ module.exports = {
   },
 
   importCss(target) {
-    let file = `vendor/highlightjs/styles/${this.theme}.css`;
-    target.import(file);
+    let file = `vendor/highlightjs/${this.theme}.css`;
+    if (fs.existsSync(file)) {
+      target.import(file);
+    }
   },
 
   importJs(target) {
